@@ -1,3 +1,6 @@
+using DemoApi.Model;
+using Microsoft.EntityFrameworkCore;
+
 namespace DemoApi
 {
     public class Program
@@ -12,6 +15,10 @@ namespace DemoApi
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddDbContext<BuildingsDatabaseContext>(options =>
+            {
+                options.UseSqlite(builder.Configuration.GetConnectionString("BuildingsDatabaseConnection"));
+            });
 
             var app = builder.Build();
 
